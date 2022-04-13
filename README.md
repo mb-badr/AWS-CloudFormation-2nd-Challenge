@@ -1,6 +1,6 @@
  # AWS-CloudFormation-2nd&3rd-Challenge
 
-    CloudFormation template to create stack for Udacity ND Cloud DevOps 2nd Challenge in Infrastructure-as-Code module
+    CloudFormation template to create stack for Udacity ND Cloud DevOps 2nd&3rd Challenge in Infrastructure-as-Code module
 
 
  #   2ndChallenge:
@@ -32,4 +32,4 @@
          >  IAM Role and InstanceProfile: The IAM Role to allow EC2 Session Manager to access our server. An InstanceProfile will allow passing the IAM role to our server.
          >  You will provide input parameters to this script, for future expansion and flexibility.
          >  Bonus/Optional: Instead of hard-coding the VPC and Subnet ID, use the import-export feature to cross reference the resources created in Challenge 2.
-         Help
+         
