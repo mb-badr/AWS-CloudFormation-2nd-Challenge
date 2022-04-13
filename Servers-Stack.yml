@@ -1,0 +1,65 @@
+Description: >
+  CloudFormation template to deploy the EC2 as web server, stack is crossed with the stack in 2nd challenge
+
+Parameters:
+
+    EnvironmentName:
+        Description: An environment name that will be prefixed to resource names
+        Type: String
+    
+
+Resources:
+
+  EC2IAMROLE:
+    Type: AWS::IAM::Role
+    Properties: 
+      AssumeRolePolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: Allow
+                  Principal:
+                    Service:
+                      - ec2.amazonaws.com
+                  Action:
+                    - 'sts:AssumeRole'
+      ManagedPolicyArns: 
+          - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+  
+  EC2InstanceProfile: 
+    Type: "AWS::IAM::InstanceProfile"
+    Properties: 
+      Roles: 
+        - !Ref EC2IAMROLE
+        
+  WebAccessSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+        GroupDescription: Allow http to our test host
+        VpcId: !ImportValue
+         'Fn::Sub': '${EnvironmentName}-VPCID'
+        SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0
+
+
+  EC2: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: "ami-0c02fb55956c7d316"
+      InstanceType: t3.micro
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      KeyName: "AWS_EC2_Demo"
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+            - Ref: "WebAccessSecurityGroup"
+          SubnetId: !ImportValue 
+             'Fn::Sub': '${EnvironmentName}-PRI-SN'
