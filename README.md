@@ -1,9 +1,9 @@
- # AWS-CloudFormation-2nd-Challenge
+ # AWS-CloudFormation-2nd&3rd-Challenge
 
     CloudFormation template to create stack for Udacity ND Cloud DevOps 2nd Challenge in Infrastructure-as-Code module
 
 
- #   Challenge:
+ #   2ndChallenge:
     Write a CloudFormation script that:
 
         >  Creates a VPC
@@ -22,3 +22,14 @@
         >  Create a Route in the Public Route Table to send default traffic ( 0.0.0.0/0 ) to the Internet Gateway you created
         >  Create a Route in the Private Route Table to send default traffic ( 0.0.0.0/0 ) to the NAT Gateway
         >  Finally, once you execute this CloudFormation script, you should be able to delete it and create it again, over and over in a predictable and repeatable manner, this is the true verification of working Infrastructure-as-Code
+
+ #   3rdChallenge:
+   ToDo
+   Use the infrastructure we created earlier to build and deploy the following:
+
+         >  EC2 Instance: An Amazon Linux 2 EC2 server in the private subnet. Choose the right AMI ID as applicable to your region and thet3.micro instance-type.
+         >  SecurityGroup: A security group for the server, that allows inbound port 80 access, for future use.
+         >  IAM Role and InstanceProfile: The IAM Role to allow EC2 Session Manager to access our server. An InstanceProfile will allow passing the IAM role to our server.
+         >  You will provide input parameters to this script, for future expansion and flexibility.
+         >  Bonus/Optional: Instead of hard-coding the VPC and Subnet ID, use the import-export feature to cross reference the resources created in Challenge 2.
+         Help
